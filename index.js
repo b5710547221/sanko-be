@@ -1,16 +1,21 @@
 const express = require("express");
 const oracledb = require("oracledb");
+const cors = require("cors"); // Import cors
 const app = express();
 const port = 3000;
 var password = "sdtvend";
 
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
+// Enable CORS for all routes
+app.use(cors());
+
+// Allow only specific origins
+const corsOptions = {
+  origin: "*", // Replace with your client's domain
+  methods: "GET,POST,PUT,DELETE", // Allowed methods
+  optionsSuccessStatus: 200, // Some legacy browsers choke on 204
+};
+
+app.use(cors(corsOptions));
 
 // Initialize Oracle Client for Thick mode
 try {
