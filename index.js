@@ -15,8 +15,6 @@ const corsOptions = {
   optionsSuccessStatus: 200, // Some legacy browsers choke on 204
 };
 
-app.use(cors(corsOptions));
-
 // Initialize Oracle Client for Thick mode
 try {
   oracledb.initOracleClient({ libDir: "C:\\oracle\\instantclient_23_4" }); // Adjust the path as necessary
@@ -44,7 +42,7 @@ async function selectAllEmployees(req, res) {
 }
 
 //get /employess
-app.get("/employees", function (req, res) {
+app.get("/employees", cors(), (req, res) => {
   selectAllEmployees(req, res);
 });
 
@@ -67,7 +65,7 @@ async function selectEmployeesById(req, res, id) {
 }
 
 //get /employee?id=<id employee>
-app.get("/employee", function (req, res) {
+app.get("/employee", cors(), (req, res) => {
   //get query param ?id
   let id = req.query.id;
   // id param if it is number
