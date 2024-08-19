@@ -28,7 +28,7 @@ async function selectAllEmployees(req, res) {
       connectString: "192.168.1.204:1521/sdtdb",
     });
 
-    console.log("GET - All employee data");
+    console.log("GET - /employees get all employee data");
     // run query to get all employees
     result = await connection.execute(`SELECT * FROM vdb_det`);
     return res.send(result);
